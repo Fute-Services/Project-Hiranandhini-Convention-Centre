@@ -175,12 +175,12 @@ export default function Interface() {
           <span>Back to the master plan</span>
         </button>
         <div className="sheet">
-          <div className="info glass">
+          <div className="info glass" key={idx}>
             <div className="eyebrow">{catById[space.cat].label} · {space.floor}</div>
             <h2 className="display">{space.name}</h2>
             <p>{space.desc}</p>
           </div>
-          <div className="steps">
+          <div className="steps" key={`s${idx}`}>
             <button type="button" className="glass step" onClick={() => openSpace(idx - 1)}>
               <Icon d="M15 6l-6 6 6 6" />
               <span><small>Previous</small><b>{SPACES[(idx - 1 + total) % total].name}</b></span>
