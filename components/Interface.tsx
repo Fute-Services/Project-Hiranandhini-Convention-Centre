@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import LiveImage from './LiveImage'
 import { CATS, FILM_SRC, IMG, SPACES } from '@/lib/data'
 
 type View = 'plan' | 'space' | 'film'
@@ -90,7 +91,7 @@ export default function Interface() {
     <div id="app">
       <section id="plan" className={`view${on('plan')}`} aria-label="Master plan">
         <div className="stage" id="stage">
-          <img className="cover" id="hero" src={IMG.cam1} alt="Aerial view of the convention centre, its dome, roof terraces and forecourt" />
+          <LiveImage id="hero" src={IMG.cam1} live={false} alt="Aerial view of the convention centre, its dome, roof terraces and forecourt" />
           {SPACES.map((s, i) => {
             const vis = (cat === 'all' || s.cat === cat) && (pick === null || pick === i)
             if (!vis) return null
@@ -172,7 +173,7 @@ export default function Interface() {
       </section>
 
       <section id="space" className={`view${on('space')}`} aria-label="Space detail">
-        <img className="cover" id="spaceImg" key={`${idx}-${shot}`} src={IMG[space.shots[shot]]} alt={`Render of the ${space.name}`} />
+        <LiveImage id="spaceImg" key={`${idx}-${shot}`} src={IMG[space.shots[shot]]} live={view === 'space'} alt={`Render of the ${space.name}`} />
         <div className="scrim-b" />
         <button type="button" className="glass pill" id="back" onClick={() => go('plan')}>
           <Icon d="M15 6l-6 6 6 6" />
@@ -206,7 +207,7 @@ export default function Interface() {
       </section>
 
       <section id="film" className={`view${on('film')}${playing ? ' playing' : ''}`} aria-label="Walkthrough film">
-        <img className="cover" id="poster" src={IMG.cam8} alt="The convention centre lit up at night, seen from the air" />
+        <LiveImage id="poster" src={IMG.cam8} live={view === 'film'} alt="The convention centre lit up at night, seen from the air" />
         <div className="shade" />
         <div className="film-c">
           <div className="eyebrow">Walkthrough film</div>

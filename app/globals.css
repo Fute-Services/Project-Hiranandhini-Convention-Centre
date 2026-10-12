@@ -184,3 +184,7 @@ button:active{transform:scale(.95);transition-duration:.12s}
 
 .rows button[aria-pressed="true"]{background:rgba(227,181,106,.16)}
 .rows button[aria-pressed="true"] span{color:var(--accent)}
+
+/* live loops */
+.loop{opacity:0;transition:opacity 1.2s var(--ease)}
+.loop.ready{opacity:1}

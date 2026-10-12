@@ -50,3 +50,11 @@ export const SPACES: Space[] = [
   { id: 'yoga', cat: 'wellness', name: 'Yoga & Meditation', floor: 'First floor', x: 57, y: 37, shots: ['cam-10-yoga'],
     desc: 'A calm studio for yoga, meditation, dance and music under a draped ceiling.' }
 ];
+
+
+/* stills that have a walkthrough clip in /public/loops (same file number) */
+const CLIPS = new Set(['02', '04', '05', '06', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'])
+export const clipOf = (src: string) => {
+  const n = /img(\d+)\.jpg$/.exec(src)?.[1]
+  return n && CLIPS.has(n) ? `/loops/img${n}.mp4` : null
+}
