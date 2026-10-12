@@ -139,7 +139,7 @@ button:active{transform:scale(.95);transition-duration:.12s}
 @keyframes settle{from{transform:scale(1.08);opacity:0}to{transform:none;opacity:1}}
 
 /* markers: staggered entrance, soft hide */
-.spot{animation:pop .8s var(--ease) both;animation-delay:calc(var(--i,0) * 45ms + 250ms);transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.spot{animation:pop .8s var(--ease) backwards;animation-delay:calc(var(--i,0) * 45ms + 250ms);transition:opacity .45s var(--ease),transform .45s var(--ease)}
 .spot.hide{display:block;opacity:0;transform:scale(.4);pointer-events:none}
 .spot.hide button{pointer-events:none}
 @keyframes pop{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:none}}
