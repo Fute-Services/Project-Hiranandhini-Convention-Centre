@@ -139,7 +139,7 @@ button:active{transform:scale(.95);transition-duration:.12s}
 @keyframes settle{from{transform:scale(1.08);opacity:0}to{transform:none;opacity:1}}
 
 /* markers: staggered entrance, soft hide */
-.spot{animation:pop .8s var(--ease) both;animation-delay:calc(var(--i,0) * 45ms + 250ms);transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.spot{animation:pop .8s var(--ease) backwards;animation-delay:calc(var(--i,0) * 45ms + 250ms);transition:opacity .45s var(--ease),transform .45s var(--ease)}
 .spot.hide{display:block;opacity:0;transform:scale(.4);pointer-events:none}
 .spot.hide button{pointer-events:none}
 @keyframes pop{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:none}}
@@ -169,3 +169,18 @@ button:active{transform:scale(.95);transition-duration:.12s}
 .film-c>*:nth-child(2){animation-delay:.08s}.film-c>*:nth-child(3){animation-delay:.16s}.film-c>*:nth-child(5){animation-delay:.24s}
 
 @media (prefers-reduced-motion:reduce){.view{transform:none;filter:none}}
+
+/* info card: staggered fade-in on every space change */
+.info{animation:cardIn .9s var(--ease) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(28px) scale(.97);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+.info>*{animation:fadeUp .8s var(--ease) both}
+.info>:nth-child(1){animation-delay:.25s}
+.info>:nth-child(2){animation-delay:.38s}
+.info>:nth-child(3){animation-delay:.52s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.steps{animation:cardIn .9s var(--ease) .35s both}
+.step{animation:fadeUp .8s var(--ease) both}
+.steps>:nth-child(1){animation-delay:.5s}.steps>:nth-child(2){animation-delay:.6s}.steps>:nth-child(3){animation-delay:.7s}
+
+.rows button[aria-pressed="true"]{background:rgba(227,181,106,.16)}
+.rows button[aria-pressed="true"] span{color:var(--accent)}
