@@ -20,6 +20,7 @@ export default function Interface() {
   const [idx, setIdx] = useState(0)
   const [shot, setShot] = useState(0)
   const [panelOn, setPanelOn] = useState(true)
+  const [pick, setPick] = useState<number | null>(null)
   const [hover, setHover] = useState<number | null>(null)
   const [playing, setPlaying] = useState(false)
   const [filmMissing, setFilmMissing] = useState(false)
@@ -52,6 +53,7 @@ export default function Interface() {
 
   const pickCat = (id: string) => {
     setCat(id)
+    setPick(null)
     setHover(null)
     setPanelOn(true)
   }
@@ -90,7 +92,7 @@ export default function Interface() {
         <div className="stage" id="stage">
           <img className="cover" id="hero" src={IMG.cam1} alt="Aerial view of the convention centre, its dome, roof terraces and forecourt" />
           {SPACES.map((s, i) => {
-            const vis = cat === 'all' || s.cat === cat
+            const vis = (cat === 'all' || s.cat === cat) && (pick === null || pick === i)
             return (
               <div
                 key={s.id}
@@ -131,14 +133,15 @@ export default function Interface() {
                       key={s.id}
                       style={{ ['--i' as string]: i }}
                       type="button"
-                      onClick={() => openSpace(i)}
+                      aria-pressed={pick === i}
+                      onClick={() => (pick === i ? openSpace(i) : setPick(i))}
                       onMouseEnter={() => setHover(i)}
                       onFocus={() => setHover(i)}
                       onMouseLeave={() => setHover(null)}
                       onBlur={() => setHover(null)}
                     >
                       <b>{s.name}</b>
-                      <span>{s.floor}</span>
+                      <span>{pick === i ? 'Open →' : s.floor}</span>
                     </button>
                   ),
                 )}

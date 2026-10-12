@@ -181,3 +181,6 @@ button:active{transform:scale(.95);transition-duration:.12s}
 .steps{animation:cardIn .9s var(--ease) .35s both}
 .step{animation:fadeUp .8s var(--ease) both}
 .steps>:nth-child(1){animation-delay:.5s}.steps>:nth-child(2){animation-delay:.6s}.steps>:nth-child(3){animation-delay:.7s}
+
+.rows button[aria-pressed="true"]{background:rgba(227,181,106,.16)}
+.rows button[aria-pressed="true"] span{color:var(--accent)}
