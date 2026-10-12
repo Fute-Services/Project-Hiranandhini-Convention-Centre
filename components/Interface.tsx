@@ -93,10 +93,11 @@ export default function Interface() {
           <img className="cover" id="hero" src={IMG.cam1} alt="Aerial view of the convention centre, its dome, roof terraces and forecourt" />
           {SPACES.map((s, i) => {
             const vis = (cat === 'all' || s.cat === cat) && (pick === null || pick === i)
+            if (!vis) return null
             return (
               <div
                 key={s.id}
-                className={`spot${s.x > 62 ? ' flip' : ''}${vis ? '' : ' hide'}${hover === i ? ' on' : ''}`}
+                className={`spot${s.x > 62 ? ' flip' : ''}${hover === i ? ' on' : ''}`}
                 style={{ left: `${s.x}%`, top: `${s.y}%`, ['--i' as string]: i }}
               >
                 <button type="button" aria-label={`Open ${s.name}, ${s.floor}`} onClick={() => openSpace(i)}>
