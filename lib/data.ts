@@ -52,9 +52,5 @@ export const SPACES: Space[] = [
 ];
 
 
-/* stills that have a walkthrough clip in /public/loops (same file number) */
-const CLIPS = new Set(['02', '04', '05', '06', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'])
-export const clipOf = (src: string) => {
-  const n = /img(\d+)\.jpg$/.exec(src)?.[1]
-  return n && CLIPS.has(n) ? `/loops/img${n}.mp4` : null
-}
+/* space views now show stills only (walkthrough loops removed) */
+export const clipOf = (_src: string): string | null => null
