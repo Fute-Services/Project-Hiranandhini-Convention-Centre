@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import LiveImage from './LiveImage'
+import SpaceStill from './SpaceStill'
 import { CATS, FILM_SRC, IMG, SPACES } from '@/lib/data'
 
 type View = 'plan' | 'space' | 'film'
@@ -83,6 +84,13 @@ export default function Interface() {
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [view, idx, go, openSpace])
+
+  // warm the cache for this space's other views and its neighbours so switching is instant
+  useEffect(() => {
+    if (view !== 'space') return
+    const near = [space, SPACES[(idx + 1) % total], SPACES[(idx - 1 + total) % total]]
+    near.forEach((s) => s.shots.forEach((k) => { new Image().src = IMG[k] }))
+  }, [view, idx, space, total])
 
   const shownCount = SPACES.filter((s) => cat === 'all' || s.cat === cat).length
   const on = (v: View) => (view === v ? ' on' : '')
@@ -173,7 +181,7 @@ export default function Interface() {
       </section>
 
       <section id="space" className={`view${on('space')}`} aria-label="Space detail">
-        <LiveImage id="spaceImg" key={`${idx}-${shot}`} src={IMG[space.shots[shot]]} live={view === 'space'} alt={`Render of the ${space.name}`} />
+        <SpaceStill id="spaceImg" src={IMG[space.shots[shot]]} alt={`Render of the ${space.name}`} />
         <div className="scrim-b" />
         <button type="button" className="glass pill" id="back" onClick={() => go('plan')}>
           <Icon d="M15 6l-6 6 6 6" />
